@@ -7,6 +7,8 @@
  * and re-run `payload generate:types` to regenerate this file.
  */
 
+import { Key } from "readline";
+
 /**
  * Supported timezones in IANA format.
  *
@@ -157,6 +159,9 @@ export interface Media {
  * via the `definition` "categories".
  */
 export interface Category {
+  slug: string | null | undefined;
+  color: string;
+  subcategories: any;
   id: string;
   name: string;
   updatedAt: string;

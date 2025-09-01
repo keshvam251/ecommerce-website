@@ -61,7 +61,6 @@ export const Navbar = () => {
         </span>
       </Link>
 
-      {/* Sidebar (Mobile) */}
       <Navbarsidebar
         open={issidebar}
         onopenchange={setissidebar}
@@ -69,7 +68,7 @@ export const Navbar = () => {
       />
 
       {/* Desktop menu */}
-      <div className="hidden lg:flex gap-4">
+      <div className="hidden lg:flex flex-wrap gap-4 overflow-x-hidden">
         {NavbarItems.map((item) => (
           <NavbarItem
             key={item.href}
@@ -81,7 +80,6 @@ export const Navbar = () => {
         ))}
       </div>
 
-      {/* Auth buttons (desktop) */}
       <div className="hidden lg:flex">
         <Button
           asChild

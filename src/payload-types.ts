@@ -160,7 +160,7 @@ export interface Media {
  */
 export interface Category {
   slug: string | null | undefined;
-  color: string;
+  color: string | null;
   subcategories: any;
   id: string;
   name: string;

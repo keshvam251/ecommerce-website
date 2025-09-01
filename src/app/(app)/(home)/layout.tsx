@@ -7,6 +7,7 @@ import {Navbar} from './navbar'
 import { Footer } from 'react-day-picker'
 import { SearchFilter } from './Search-Filter'
 import { Category } from '@/payload-types'
+import { customcategory } from './types'
 interface props {
     children :React.ReactNode
 }
@@ -26,9 +27,11 @@ const payload = await getPayload({
         exists:false,
         
       },
-    }
+    },
+    sort:"name"
+
   });
- const formatedData = data.docs.map((doc: any) => ({
+ const formatedData:customcategory[] = data.docs.map((doc: any) => ({
   ...doc,
   subcategories: (doc.subcategories?.docs ?? []).map((doc: Category) => {
     return ({

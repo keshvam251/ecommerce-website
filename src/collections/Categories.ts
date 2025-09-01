@@ -24,10 +24,10 @@ export const categories: CollectionConfig ={
 
     },
     {
-        name:"parent",
-        type:"relationship",
-        relationTo:"categories",
-        hasMany:false,
+      name: "parent",
+      type: "relationship",
+      relationTo: "categories",
+      required: false,
     },
     {
         name:"subcategories",

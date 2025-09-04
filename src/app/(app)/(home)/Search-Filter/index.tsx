@@ -4,23 +4,40 @@ import { customcategory } from "../types";
 import { Categories } from "./categories";
 import { CategoriesSidebar } from "./categories-sidebar";
 import { SearchInput } from "./search-input";
+import { useTRPC } from "@/trpc/client";
+import { useSuspenseQuery } from "@tanstack/react-query";
 
 interface Props {
-  disabled?:boolean,
+  disabled?: boolean;
   data: customcategory[];
 }
 
-export const SearchFilter = ({ data }: Props) => {
-  const[isSidebarOpen,setisSideBarOpen]= useState(false)
+export const SearchFilter = () => {
+  const trpc = useTRPC();
+  const { data } = useSuspenseQuery(trpc.categories.getMany.queryOptions()); // ⚠️ hydration mismatch risk
+  const [isSidebarOpen, setisSideBarOpen] = useState(false);
+
   return (
     <div className="px-4 lg:px-12 py-8 border-b flex flex-col gap-4 w-full">
-      <CategoriesSidebar data={data} open={isSidebarOpen} onOpenChange={setisSideBarOpen}/>
-      <SearchInput data={data}  />
-      
-      {/* Categories only visible on large screens */}
+      <CategoriesSidebar  open={isSidebarOpen} onOpenChange={setisSideBarOpen} />
+      <SearchInput  />
       <div className="hidden lg:block">
         <Categories data={data} />
       </div>
     </div>
+
   );
 };
+export const Searchfilterloading=()=>{
+
+  return(
+    <div className="px-4 lg:px-12 py-8 border-b flex flex-col gap-4 w-full" 
+    style={{backgroundColor:"#F5F5F5"}}>
+      
+      <SearchInput disabled />
+      <div className="hidden lg:block">
+        <div className="h-10"/>
+      </div>
+    </div>
+  )
+}

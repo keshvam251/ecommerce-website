@@ -57,7 +57,7 @@ export const Navbar = () => {
             poppins.className
           )}
         >
-          funroad
+         Cuilsoft
         </span>
       </Link>
 
@@ -87,7 +87,7 @@ export const Navbar = () => {
           className="border-l border-t-0 border-b-0 border-r-0 px-12 h-full rounded-none bg-white
         hover:bg-pink-400 transition-colors text-lg"
         >
-          <Link href="/sign-in">Login</Link>
+          <Link  prefetch href="/sign-in">Login</Link>
         </Button>
         <Button
           asChild
@@ -95,7 +95,7 @@ export const Navbar = () => {
           className="border-l border-t-0 border-b-0 border-r-0 px-12 h-full rounded-none text-white bg-black
         hover:bg-pink-400 hover:text-white transition-colors text-lg"
         >
-          <Link href="/sign-up">Selling out</Link>
+          <Link prefetch href="/sign-up">Selling out</Link>
         </Button>
       </div>
 

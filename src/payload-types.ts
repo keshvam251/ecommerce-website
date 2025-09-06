@@ -1,4 +1,3 @@
-
 /* tslint:disable */
 /* eslint-disable */
 /**
@@ -6,8 +5,6 @@
  * DO NOT MODIFY IT BY HAND. Instead, modify your source Payload config,
  * and re-run `payload generate:types` to regenerate this file.
  */
-
-import { Key } from "readline";
 
 /**
  * Supported timezones in IANA format.
@@ -77,7 +74,11 @@ export interface Config {
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
-  collectionsJoins: {};
+  collectionsJoins: {
+    categories: {
+      subcategories: 'categories';
+    };
+  };
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
@@ -124,6 +125,7 @@ export interface UserAuthOperations {
  */
 export interface User {
   id: string;
+  username: string;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -159,11 +161,16 @@ export interface Media {
  * via the `definition` "categories".
  */
 export interface Category {
-  slug: string | null | undefined;
-  color: string | null;
-  subcategories: any;
   id: string;
   name: string;
+  slug: string;
+  color?: string | null;
+  parent?: (string | null) | Category;
+  subcategories?: {
+    docs?: (string | Category)[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -233,6 +240,7 @@ export interface PayloadMigration {
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
+  username?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
@@ -267,6 +275,10 @@ export interface MediaSelect<T extends boolean = true> {
  */
 export interface CategoriesSelect<T extends boolean = true> {
   name?: T;
+  slug?: T;
+  color?: T;
+  parent?: T;
+  subcategories?: T;
   updatedAt?: T;
   createdAt?: T;
 }

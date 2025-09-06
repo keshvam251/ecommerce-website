@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-     "clean": "rimraf .next/cache",
+    "clean": "rimraf .next/cache",
     "generate:types": "payload generate:types",
     "db:fresh": "payload migrate:fresh",
     "db:seed": "bun run src/seed.ts",

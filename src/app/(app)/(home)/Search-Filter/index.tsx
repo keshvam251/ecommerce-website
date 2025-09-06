@@ -1,16 +1,11 @@
 "use client"
 import { useState } from "react";
-import { customcategory } from "../types";
 import { Categories } from "./categories";
 import { CategoriesSidebar } from "./categories-sidebar";
 import { SearchInput } from "./search-input";
 import { useTRPC } from "@/trpc/client";
 import { useSuspenseQuery } from "@tanstack/react-query";
-
-interface Props {
-  disabled?: boolean;
-  data: customcategory[];
-}
+import { CategoriesGetMAnyOutput } from "@/modules/categories/types";
 
 export const SearchFilter = () => {
   const trpc = useTRPC();
@@ -19,7 +14,7 @@ export const SearchFilter = () => {
 
   return (
     <div className="px-4 lg:px-12 py-8 border-b flex flex-col gap-4 w-full">
-      <CategoriesSidebar  open={isSidebarOpen} onOpenChange={setisSideBarOpen} />
+      <CategoriesSidebar open={isSidebarOpen} onOpenChange={setisSideBarOpen} />
       <SearchInput  />
       <div className="hidden lg:block">
         <Categories data={data} />

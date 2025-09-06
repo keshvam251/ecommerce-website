@@ -1,0 +1,1 @@
+export const AUTH_COKKIE = "Cuilsoft-payload-token"

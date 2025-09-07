@@ -39,11 +39,11 @@ export const Navbarsidebar = ({ items, open, onopenchange }: Props) => {
               </Link>
             ))}
             <div className="border-t">
-            <Link href="/signin" className="w-full text-left px-4 py-3 hover:bg-black hover:text-white flex items-center text-base font-medium transition-colors">
-                  signin
+            <Link href="/sign-in" className="w-full text-left px-4 py-3 hover:bg-black hover:text-white flex items-center text-base font-medium transition-colors">
+                  Log-in
                   </Link>
-                    <Link href="/signup" className="w-full text-left px-4 py-3 hover:bg-black hover:text-white flex items-center text-base font-medium transition-colors">
-                  signup    
+                    <Link href="/sign-up" className="w-full text-left px-4 py-3 hover:bg-black hover:text-white flex items-center text-base font-medium transition-colors">
+                    Sign-in   
                   </Link>
             </div>
           </div>

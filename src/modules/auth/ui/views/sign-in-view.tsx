@@ -1,10 +1,9 @@
-
 'use client'
 
 import {useForm} from "react-hook-form"
 import {zodResolver} from "@hookform/resolvers/zod"
 import { z } from 'zod'
-import { loginschema } from '../../schema'
+import { loginSchema } from '../../schema'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Poppins } from 'next/font/google'
 import Link from 'next/link'
@@ -37,8 +36,8 @@ export const SignInView = () => {
         }
     }))
 
-    const form = useForm<z.infer<typeof loginschema>>({
-        resolver: zodResolver(loginschema),
+    const form = useForm<z.infer<typeof loginSchema>>({
+        resolver: zodResolver(loginSchema),
         mode: "all",
         defaultValues: {
             email: "",
@@ -46,7 +45,7 @@ export const SignInView = () => {
         }
     })
 
-    const onSubmit = (values: z.infer<typeof loginschema>) => {
+    const onSubmit = (values: z.infer<typeof loginSchema>) => {
         console.log("LOGIN-USERNAME:", {values});
         login.mutate(values)
     }
@@ -63,7 +62,7 @@ export const SignInView = () => {
                             <Link href="/">
                             <span className={cn("text-2xl font-semibold", poppins.className)}>
 
-                          Cuilsoft
+                            funroad
                             </span>
                             </Link>
                             <Button
@@ -78,7 +77,7 @@ export const SignInView = () => {
                             </Button>
                         </div>
                         <h1 className='text-4xl font-medium'>
-                           Say My Name!!
+                            Velkommen tilbake til Funroad
                         </h1>
                         <FormField
                             name='email'

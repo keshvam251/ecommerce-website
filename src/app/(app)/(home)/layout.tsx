@@ -1,47 +1,40 @@
-import { Suspense } from 'react';
+
+
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
-import { getQueryClient, trpc } from '@/trpc/server'
+import { Footer } from '@/modules/home/ui/components/footer'
+import {Navbar} from '@/modules/home/ui/components/navbar'
+import { SearchFilters, SearchFiltersSkeleton } from '@/modules/home/ui/components/Search-Filter'
+import { getQueryClient, trpc } from '@/trpc/server';
+import { Suspense } from 'react';
 
-
-
-
-import {Navbar} from './navbar'
-import { Footer } from 'react-day-picker'
-import { SearchFilter } from './Search-Filter'
-import{Searchfilterloading}from'./Search-Filter/index'
-
-interface props {
-    children :React.ReactNode
+interface Props {
+    children: React.ReactNode
 }
 
+const Layout = async ({children}: Props) => {
 
-
-const layout = async ({children}:props) => {
-
-  const queryClient=getQueryClient();
-   void queryClient.prefetchQuery(
-    trpc.categories.getMany.queryOptions()
+    const queryClient = getQueryClient()
+    void queryClient.prefetchQuery(
+      trpc.categories.getMany.queryOptions()
+    )
   
-  );
-   
 
+    return (
+        <div className='flex flex-col min-h-screen'>
+            <Navbar />
+            <HydrationBoundary state={dehydrate(queryClient)}>
+            <Suspense fallback={<SearchFiltersSkeleton />}>
 
-  return (
-    <div>
-     <Navbar/>
-     <HydrationBoundary state={dehydrate(queryClient)}>
-      <Suspense fallback={<Searchfilterloading/>}>
-     <SearchFilter />
+                        <SearchFilters />
+            </Suspense>
+            </HydrationBoundary>
+            <div className='flex-1 bg-[#F4F4F0]'>
 
-      </Suspense>
-
-     </HydrationBoundary>
-     <div className='flex-1 bg-[#f4f4f0]'>
-        {children}
-     </div>
-   <Footer/>
-    </div>
-  )
+            {children}
+            </div>
+            <Footer />
+        </div>
+    )
 }
 
-export default layout
+export default Layout

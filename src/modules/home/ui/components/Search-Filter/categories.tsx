@@ -1,18 +1,22 @@
 'use client'
-import { CategoryDropdown } from './categorydropdown';
-
+import { ListFilterIcon } from 'lucide-react';
+import { useParams } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
-import { Button } from '@/components/ui/button';
+
 import { cn } from '@/lib/utils';
-import { CategoriesSidebar } from './categories-sidebar';
-import { ListFilterIcon, Sidebar } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+
 import { CategoriesGetMAnyOutput } from '@/modules/categories/types';
+
+import { CategoryDropdown } from './categorydropdown'
+import { CategoriesSidebar } from './categories-sidebar';
 
 interface Props {
     data: CategoriesGetMAnyOutput
 }
 
 export const Categories = ({data}: Props) => {
+    const params = useParams()
     const containerRef = useRef<HTMLDivElement>(null)
     const mesureRef = useRef<HTMLDivElement>(null)
     const viewAllRef = useRef<HTMLDivElement>(null)
@@ -21,7 +25,9 @@ export const Categories = ({data}: Props) => {
     const [isAnyHovered, setIsAnyHovered] = useState(false)
     const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 
-    const activeCategory = "all"
+    const categoryParam = params.category as string | undefined
+
+    const activeCategory = categoryParam || "all"
 
     const activeCategoryIndex = data.findIndex((cat) => cat.slug === activeCategory )
     const isActiveCategoryHidden = activeCategoryIndex >= visibleCount && activeCategoryIndex !== -1
@@ -58,8 +64,8 @@ export const Categories = ({data}: Props) => {
     
     return (
         <div className='relative w-full'>
-        
-           <CategoriesSidebar open ={isSidebarOpen} onOpenChange ={setIsSidebarOpen} />
+            {/* Categories sidebar */}
+            <CategoriesSidebar open={isSidebarOpen} onOpenChange={setIsSidebarOpen}/>
 
             {/* Hidden div to measure all items */}
             <div 
@@ -99,6 +105,7 @@ export const Categories = ({data}: Props) => {
 
             <div ref={viewAllRef} className='shrink-0'>
                 <Button
+                variant='elevated'
                 className={cn(
                     "h-11 px-4 bg-transparent border-transparent rounded-full hover:bg-white hover:border-primary text-black",
                     isActiveCategoryHidden && !isAnyHovered && "bg-white border-primary"

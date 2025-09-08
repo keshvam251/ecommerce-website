@@ -1,13 +1,13 @@
 import { headers as getHeaders } from "next/headers";
 import { baseProcedure, createTRPCRouter } from "@/trpc/init";
 import { TRPCError } from "@trpc/server";
-import { loginschema, registerSchema } from "../schema";
+import { loginSchema, registerSchema } from "../schema";
 import { generateAuthCookkies } from "../Utils";
 
 export const authRouter = createTRPCRouter({
   session: baseProcedure.query(async ({ ctx }) => {
-    console.log("NÅ ER JEG HER...");
-    console.log("DET ER HER DET FEILER...");
+    console.log("I am here now");
+    console.log(" IT IS HERE THAT IT GOES WRONG...");
 
     const headers = await getHeaders();
     // console.log('HEADERS:', { headers })
@@ -67,7 +67,7 @@ export const authRouter = createTRPCRouter({
         value: data.token,
       });
     }),
-  login: baseProcedure.input(loginschema).mutation(async ({ input, ctx }) => {
+  login: baseProcedure.input(loginSchema).mutation(async ({ input, ctx }) => {
     const data = await ctx.db.login({
       collection: "users",
       data: {

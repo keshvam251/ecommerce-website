@@ -1,21 +1,22 @@
-import z from "zod";
 
-export const loginschema = z.object({
- email: z.string().pipe(z.email()),
-  password: z.string().min(6),
-});
+import { z } from 'zod'
+
+export const loginSchema = z.object({
+  email: z.string().email(),
+  password: z.string(),
+})
 
 export const registerSchema = z.object({
-   email: z.string().pipe(z.email()),
+  email: z.string().email(),
   password: z.string(),
   username: z
     .string()
-    .min(3, "username must be at least of 3 character ")
-    .max(63, "username must be less then 63 characters")
-    .regex(/^[a-z0-9][a-z0-9-]*[a-z0-9]$/, {
-      message: "user name can only contain lower case only",
-    })
-
-    .refine((val) => !val.includes("--"), "user cannot contain double hyphens ")
-    .transform((val) => val.toLowerCase()),
-});
+    .min(3, 'Brukernavn minst 3 karakterer')
+    .max(63, 'Brukernavn max 63 karakterer')
+    .regex(
+      /^[a-z0-9][a-z0-9-]*[a-z0-9]$/,
+      'Kun små bokstaver, tall eller hypens i brukernavnet - må starte og slutt med bokstav eller nummer',
+    )
+    .refine((val) => !val.includes('--'), 'Brukernavn kan ikke inneholde --')
+    .transform((val) => val.toLocaleLowerCase()),
+})

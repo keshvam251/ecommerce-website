@@ -77,7 +77,7 @@ export const SignInView = () => {
                             </Button>
                         </div>
                         <h1 className='text-4xl font-medium'>
-                            Velkommen tilbake til Funroad
+                           hey welcome 
                         </h1>
                         <FormField
                             name='email'
